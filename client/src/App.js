@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Feed from "./UI/Feed";
-import Sidebar from "./UI/Sidebar";
+import UsersMetrics from "./UI/Dashboard/UsersMetrics";
+import Feed from "./UI/Twitter/Feed";
+import Sidebar from "./UI/Twitter/Sidebar";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -14,9 +15,10 @@ function App() {
 
   return (
     <div className="flex flex-row">
-      <Sidebar />
+      <UsersMetrics />
+      {/* <Sidebar />
       <Feed />
-      <div className="w-1/3 bg-black"></div>
+      <div className="w-1/3 bg-black"></div> */}
     </div>
   );
 }
