@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import UsersMetrics from "./UI/Dashboard/UsersMetrics";
+import EventDashboard from "./UI/pages/EventDashboard";
+import { Home } from "./UI/pages/Home";
 import Feed from "./UI/Twitter/Feed";
 import Sidebar from "./UI/Twitter/Sidebar";
 
@@ -15,10 +18,12 @@ function App() {
 
   return (
     <div className="flex flex-row">
-      <UsersMetrics />
-      {/* <Sidebar />
-      <Feed />
-      <div className="w-1/3 bg-black"></div> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/event_dashboard" element={<EventDashboard />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
