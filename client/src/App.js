@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:8000/message")
       .then((res) => res.json())
-      .then((data) => setMessage(data.message));
+      .then((data) => console.log(data.message));
   }, []);
 
   return (
