@@ -5,9 +5,11 @@ import Sidebar from "../Twitter/Sidebar";
 export const Home = () => {
   return (
     <>
-      <Sidebar />
-      <Feed />
-      <div className="w-1/3 bg-black"></div>
+      <div className="flex flex-row">
+        <Sidebar />
+        <Feed />
+        <div className="w-1/3 bg-black"></div>
+      </div>
     </>
   );
 };
