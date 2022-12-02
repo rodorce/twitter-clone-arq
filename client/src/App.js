@@ -10,11 +10,11 @@ import Sidebar from "./UI/Twitter/Sidebar";
 function App() {
   const [message, setMessage] = useState("");
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/message")
-  //     .then((res) => res.json())
-  //     .then((data) => setMessage(data.message));
-  // }, []);
+  useEffect(() => {
+    fetch("http://localhost:8000/message")
+      .then((res) => res.json())
+      .then((data) => console.log(data.message));
+  }, []);
 
   return (
     <div className="flex flex-row">
