@@ -1,20 +1,25 @@
-import React from "react";
-const IndividualTweet = () => {
+import React, { useEffect } from "react";
+import CommentTweet from "./CommentTweet";
+import Replies from "./Replies";
+const IndividualTweet = (props) => {
+  const postedFlag = (data) => {
+    props.postedReplyFlag(data);
+  };
+
+  useEffect(() => {
+    console.log("re-render");
+  }, [postedFlag]);
   return (
     <>
-      <div className="bg-black dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border mb-10">
+      <div className="w-full bg-black dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border mb-10">
         <div className="flex justify-between">
           <div className="flex items-center">
-            <img
-              className="h-11 w-11 rounded-full"
-              src="https://pbs.twimg.com/profile_images/1287562748562309122/4RLk5A_U_x96.jpg"
-            />
             <div className="ml-1.5 text-sm leading-tight">
               <span className="text-black dark:text-white font-bold block ">
-                Visualize Value
+                {props.tweet.name}
               </span>
               <span className="text-gray-500 dark:text-gray-400 font-normal block">
-                @visualizevalue
+                @{props.tweet.author}
               </span>
             </div>
           </div>
@@ -28,22 +33,13 @@ const IndividualTweet = () => {
           </svg>
         </div>
         <p className="text-black dark:text-white block text-xl leading-snug mt-3">
-          “No one ever made a decision because of a number. They need a story.”
-          — Daniel Kahneman
+          {props.tweet.content}
         </p>
         <p className="text-gray-500 dark:text-gray-400 text-base py-1 my-0.5">
-          10:05 AM · Dec 19, 2020
+          {props.tweet.date}
         </p>
         <div className="border-gray-200 dark:border-gray-600 border border-b-0 my-1"></div>
         <div className="text-gray-500 dark:text-gray-400 flex mt-3">
-          <div className="flex items-center mr-6">
-            <svg className="fill-current h-5 w-auto" viewBox="0 0 24 24">
-              <g>
-                <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
-              </g>
-            </svg>
-            <span className="ml-3 text-sm">615</span>
-          </div>
           <div className="flex items-center mr-6">
             <svg className="fill-current h-5 w-auto" viewBox="0 0 24 24">
               <g>
@@ -51,10 +47,16 @@ const IndividualTweet = () => {
               </g>
             </svg>
             <span className="ml-3 text-sm">
-              93 people are Tweeting about this
+              {props.tweet.replies.length} respuesta(s)
             </span>
           </div>
         </div>
+        {props.tweet.replies.length > 0
+          ? props.tweet.replies.map((reply) => {
+              return <Replies reply={reply} />;
+            })
+          : ""}
+        <CommentTweet tweet={props.tweet} postedFlag={postedFlag} />
       </div>
     </>
   );

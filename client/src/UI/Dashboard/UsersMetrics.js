@@ -5,7 +5,7 @@ const UsersMetrics = () => {
   return (
     <div className="mx-auto my-12">
       <h1 className="text-4xl font-bold mb-12">Reporte diario</h1>
-      <table class="table-auto">
+      <table className="table-auto">
         <thead className="border">
           <tr>
             <th className="mx-12 px-12">Usuario</th>
@@ -25,7 +25,7 @@ const UsersMetrics = () => {
       </table>
       <div className="mx-auto my-12">
         <h1 className="text-2xl font-bold mb-4">Tweet mas comentado</h1>
-        <IndividualTweet />
+        {/* <IndividualTweet /> */}
       </div>
     </div>
   );
