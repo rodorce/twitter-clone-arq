@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postAppLog } from "../../api/api_methods";
 import { useAuth } from "../../contexts/Auth";
 import { supabase } from "../../services/supabaseClient";
 
@@ -13,11 +14,11 @@ const Login = () => {
     e.preventDefault();
 
     // Calls `signIn` function from the context
-    const { error } = await signIn({ email, password });
-
+    const { data, error } = await signIn({ email, password });
     if (error) {
       alert("error signing in");
     } else {
+      postAppLog(data.user.user_metadata.username);
       // Redirect user to Dashboard
       navigate("/");
     }

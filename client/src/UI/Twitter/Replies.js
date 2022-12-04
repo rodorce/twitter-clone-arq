@@ -2,7 +2,7 @@ import React from "react";
 
 const Replies = (props) => {
   return (
-    <div className="w-full bg-black dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border mb-1">
+    <div className="w-full bg-black dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border mb-1 reply">
       <div className="flex justify-between">
         <div className="flex items-center">
           <div className="ml-1.5 text-sm leading-tight">

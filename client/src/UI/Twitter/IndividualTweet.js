@@ -2,13 +2,6 @@ import React, { useEffect } from "react";
 import CommentTweet from "./CommentTweet";
 import Replies from "./Replies";
 const IndividualTweet = (props) => {
-  const postedFlag = (data) => {
-    props.postedReplyFlag(data);
-  };
-
-  useEffect(() => {
-    console.log("re-render");
-  }, [postedFlag]);
   return (
     <>
       <div className="w-full bg-black dark:bg-gray-800 border-gray-200 dark:border-gray-800 p-4 rounded-xl border mb-10">
@@ -32,7 +25,7 @@ const IndividualTweet = (props) => {
             </g>
           </svg>
         </div>
-        <p className="text-black dark:text-white block text-xl leading-snug mt-3">
+        <p className="text-black dark:text-white block text-xl leading-snug mt-3 individualTweet">
           {props.tweet.content}
         </p>
         <p className="text-gray-500 dark:text-gray-400 text-base py-1 my-0.5">
@@ -51,12 +44,7 @@ const IndividualTweet = (props) => {
             </span>
           </div>
         </div>
-        {props.tweet.replies.length > 0
-          ? props.tweet.replies.map((reply) => {
-              return <Replies reply={reply} />;
-            })
-          : ""}
-        <CommentTweet tweet={props.tweet} postedFlag={postedFlag} />
+        {props.children}
       </div>
     </>
   );

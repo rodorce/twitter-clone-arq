@@ -3,9 +3,11 @@ import { supabase } from "../../services/supabaseClient";
 
 const CommentTweet = (props) => {
   const [reply, setReply] = useState("");
-  const [isPosted, setIsPosted] = useState(true);
   const [user, setUser] = useState(null);
-
+  const [tweetsCounter, setTweetsCounter] = useState(0);
+  const [events, setEvents] = useState(null);
+  const [repliesCounter, setRepliesCounter] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   async function commentTweet(e) {
     e.preventDefault();
     var today = new Date();
@@ -19,22 +21,49 @@ const CommentTweet = (props) => {
         replies: [...props.tweet.replies, reply],
       })
       .eq("id", props.tweet.id);
-    setIsPosted((isPosted) => !isPosted);
-    props.postedFlag(isPosted);
+    // props.postedNewReply(newReplyFlag);
+    insertReplyEvent();
+  }
+
+  async function getEvents() {
+    const { data, error } = await supabase
+      .from("events")
+      .select()
+      .eq("user", user)
+      .eq("replies", 0);
+    console.log(data);
+    if (data.length > 0) {
+      return data[0];
+    } else {
+      const { data, error } = await supabase
+        .from("events")
+        .select()
+        .eq("user", user);
+      return data[0];
+    }
+  }
+
+  async function insertReplyEvent() {
+    const event = await getEvents();
+
+    const { data, error } = await supabase
+      .from("events")
+      .update({ replies: event.replies + 1 })
+      .eq("user", user);
   }
 
   async function getSession() {
     const { data, error } = await supabase.auth.getSession();
     setUser(data.session.user.user_metadata.username);
+    setIsLoading(false);
   }
 
   const handleOnChange = (e) => {
     setReply({ content: e.target.value, author: user });
   };
-
   useEffect(() => {
     getSession();
-  }, []);
+  }, [isLoading]);
 
   return (
     <>

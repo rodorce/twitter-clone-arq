@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/Auth";
 import Feed from "../Twitter/Feed";
 import Sidebar from "../Twitter/Sidebar";
 import { supabase } from "../../services/supabaseClient";
-import { fetchTweetData } from "../../API/FetchTweets";
+import { fetchTweetData } from "../../api/api_methods";
 export const Home = () => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");

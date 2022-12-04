@@ -1,13 +1,16 @@
 # Principios SOLID
 
+## Single Responsability Principle
+
+Este principio se utiliza cuando separamos la llamada de los Tweets en FetchTweets del componente IndividualTweet el cual su única función es mostrar la información de los tweets en el feed.
+
 ## Open Close Principle
 
-Este principio se utiliza a lo largo de todo el proyecto ya que se crean multiples componentes cuyo comportamiento y estructura puede ser extendido
-sin necesidad de actualizar el código fuente.
+Este principio se utiliza cuando queremos generar un tweet individual en nuestro componente Feed. Este puede tener como hijos respuestas al tweet o simplemente no generar la vista como hilo cuando no se tienen respuestas. De modo que la lógica de nuestro componente IndividualTweet se puede extender ya que permite tener componentes hijos o no.
 
-Claro ejemplo de esto es crear multiples instancias del componente IndividualTweet, donde se va instanciando dependiendo de las propiedades que queremos que tenga (información de un tweet en particular) y así no estamos duplicando código. Además hay casos en que un tweet puede tener replies, y en lugar
-de generar toda esa responsabilidad de un nuevo tweet como respuesta en el componente IndividualTweet lo hacemos en el componente CommentTweet para así
-poder aislar sus responsabilidades y solamente manejar en individual tweet la lógica de si un tweet tiene respuestas o no.
+## Liskov Substitution Principle
+
+Como en este proyecto los patrones de diseño utilizados son en componentes y no en clases, no pudimos encontrar un ejemplo como tal que aplicara en este caso con nuestro proyecto en React.
 
 ## Interface Seggregation Principle
 
@@ -16,6 +19,20 @@ Este principio es utilizado al momento que queremos pasar propiedades de un twee
 ## Dependency Inversion Simple
 
 Este principio se encuentra aplicado en nuestro componente Home y Feed donde la lógica de llamada de un API en lugar de manejarla en Home o Feed. La manejamos en un context de React de modo que si cambiamos la lógica de la llamada no va a ser necesario modificar nuestro componente porque este solamente se encarga de representar los datos en la UI. La función de llamada se la inyectamos a Feed por medio de nuestro React Context.
+
+# Patrones de diseño
+
+## Composition
+
+Este Design Pattern es utilizado bastamente en la mayoría de las aplicaciones de React y es que en esta aplicación en específico tenemos subcomponentes que conforman una relación (en jerarquía de un árbol) y su unión conforman a un solo componente complejo. Ejemplo: En la clase Home tenemos el Sidebar y el Feed, el Feed se divide todavía en más componentes los cuales son TweetModal e IndividualTweet e IndividualTweet tiene un subcomponente que se llama TweetComment. Así aislamos la funcionalidad que debe manejar cada componente dentro de su código.
+
+## Factory
+
+Este Design Pattern se aplica al momento de que queremos cargar threads o hilos con comentarios en un tweet. En el componente IndividualTweets podemos tener que el tweet tenga respuestas o no, por lo que hacemos uso de conditional rendering para generar la instancia de comentarios o no con el componente Replies. Entonces lo que estamos haciendo es que nuestro IndividualTweet tenga operaciones para generar dos tipos de tweets: con comentarios y sin comentarios.
+
+# Decoupling
+
+En nuestra aplicación separamos la lógica de las llamadas del API de nuestros componentes UI. Este ejemplo se ve claramente en la generación de código de FetchTweets.js que posteriormente se utiliza en Feed.js
 
 # Getting Started with Create React App
 

@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../services/supabaseClient";
-
+import { postTweetData } from "../../api/api_methods";
 const TweetModal = (props) => {
   const [content, setContent] = useState("");
-  const [newTweetFlag, setNewTweetFlag] = useState(true);
+  const [newTweetFlag, setNewTweetFlag] = useState(false);
   const [tweetsCounter, setTweetsCounter] = useState(0);
   const [events, setEvents] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function postTweet(e) {
+  async function postNewTweet(e) {
     e.preventDefault();
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    var yyyy = today.getFullYear();
-    today = mm + "/" + dd + "/" + yyyy;
-    console.log(content);
-    const { error } = await supabase.from("tweets").insert({
-      content: content,
-      replies: [],
-      author: props.username,
-      name: props.name,
-      date: today,
-    });
+    postTweetData(props, content);
     setNewTweetFlag((newTweetFlag) => !newTweetFlag);
     props.postedNewTweet(newTweetFlag);
     insertTweetEvent();
@@ -69,7 +57,7 @@ const TweetModal = (props) => {
     <div className="w-full bg-gray-900 rounded-2xl transform -translate-y-5">
       <form
         className="w-full flex px-3 py-2 pt-10"
-        onSubmit={(e) => postTweet(e)}
+        onSubmit={(e) => postNewTweet(e)}
       >
         <div className="mr-1"></div>
         <div className="flex-1">
