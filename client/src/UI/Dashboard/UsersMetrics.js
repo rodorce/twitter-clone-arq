@@ -10,7 +10,7 @@ const UsersMetrics = (props) => {
           <tr>
             <th className="mx-12 px-12">Usuario</th>
             <th className="mx-12 px-12">Tweets creados</th>
-            <th className="mx-12 px-12">Tweets comentados</th>
+            <th className="mx-12 px-12">Cantidad de tweets comentados</th>
             <th className="mx-12 px-12">Cantidad de veces que abrió la app</th>
           </tr>
         </thead>
