@@ -1,3 +1,22 @@
+# Principios SOLID
+
+## Open Close Principle
+
+Este principio se utiliza a lo largo de todo el proyecto ya que se crean multiples componentes cuyo comportamiento y estructura puede ser extendido
+sin necesidad de actualizar el código fuente.
+
+Claro ejemplo de esto es crear multiples instancias del componente IndividualTweet, donde se va instanciando dependiendo de las propiedades que queremos que tenga (información de un tweet en particular) y así no estamos duplicando código. Además hay casos en que un tweet puede tener replies, y en lugar
+de generar toda esa responsabilidad de un nuevo tweet como respuesta en el componente IndividualTweet lo hacemos en el componente CommentTweet para así
+poder aislar sus responsabilidades y solamente manejar en individual tweet la lógica de si un tweet tiene respuestas o no.
+
+## Interface Seggregation Principle
+
+Este principio es utilizado al momento que queremos pasar propiedades de un tweet a un nuevo componente, en lugar de pasar toda la información del tweet, solamente pasamos la que necesitamos para manejar la lógica del componente hijo. Este ejemplo claramente se da en el componente Home y Sidebar. El componente Home en lugar de pasarle todos los metadatos de la sesión de usuario al componente Sidebar, este solamente le envía el nombre del usuario y su username.
+
+## Dependency Inversion Simple
+
+Este principio se encuentra aplicado en nuestro componente Home y Feed donde la lógica de llamada de un API en lugar de manejarla en Home o Feed. La manejamos en un context de React de modo que si cambiamos la lógica de la llamada no va a ser necesario modificar nuestro componente porque este solamente se encarga de representar los datos en la UI. La función de llamada se la inyectamos a Feed por medio de nuestro React Context.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

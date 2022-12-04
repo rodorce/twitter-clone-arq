@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import IndividualTweet from "./IndividualTweet";
 import TweetModal from "./TweetModal";
 import { supabase } from "../../services/supabaseClient";
+import { FetchTweetContext } from "../../contexts/TweetsContext";
 
 const Feed = (props) => {
+  const fetchTweetsFromContext = useContext(FetchTweetContext);
   const [tweets, setTweets] = useState("");
   const [loading, setLoading] = useState(true);
   const [postedReply, setPostedReply] = useState(false);
   const [postedTweet, setPostedTweet] = useState(false);
-  async function getTweets() {
-    const { data, error } = await supabase
-      .from("tweets")
-      .select()
-      .order("id", { ascending: false });
-    setTweets(data);
-    setLoading(false);
-  }
 
   useEffect(() => {
-    getTweets();
-  }, [postedReply, postedTweet]);
+    const load = async () => {
+      const data = await fetchTweetsFromContext();
+      setTweets(data);
+      setLoading(false);
+    };
+    load();
+  }, [fetchTweetsFromContext, postedReply, postedTweet]);
 
   const postedReplyFlag = (data) => {
     setPostedReply(data);
