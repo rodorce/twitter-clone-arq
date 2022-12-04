@@ -76,6 +76,14 @@ const Login = () => {
                 Iniciar sesión
               </button>
             </div>
+            <h2
+              className="text-md font-semibold cursor-pointer"
+              onClick={() => {
+                navigate("/register");
+              }}
+            >
+              ¿No tienes cuenta? Registrate
+            </h2>
           </form>
         </div>
       </div>

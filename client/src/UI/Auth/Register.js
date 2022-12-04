@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../services/supabaseClient";
 
 const Register = () => {
@@ -7,7 +8,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -31,6 +32,7 @@ const Register = () => {
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
+      navigate("/");
     }
   };
 

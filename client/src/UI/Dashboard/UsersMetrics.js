@@ -4,7 +4,6 @@ import IndividualTweet from "../Twitter/IndividualTweet";
 const UsersMetrics = (props) => {
   return (
     <div className="mx-auto my-12">
-      <h1 className="text-4xl font-bold mb-12 text-center">Reporte diario</h1>
       <table className="table-auto mx-auto">
         <thead className="border">
           <tr>

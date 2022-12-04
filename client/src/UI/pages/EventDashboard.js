@@ -57,7 +57,8 @@ const EventDashboard = () => {
 
   console.log(mostCommentedTweet);
   return (
-    <div className="event-dashboard">
+    <div className="event-dashboard mt-10">
+      <h1 className="text-4xl font-bold mb-12 text-center">Reporte diario</h1>
       {!isLoadingEvents
         ? events.map((event) => <UsersMetrics event={event} />)
         : "Cargando datos"}
